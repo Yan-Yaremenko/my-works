@@ -82,7 +82,7 @@ $(document).ready( function() {
             $('.our-work-links').append('<div class="design-links">','<div class="signed">')
             $('.design-links').append('<a href="#" class="design-link1">', '<a href="#" class="design-link2">')
             $('.signed').append('<a href="#">CREATIVE DESIGN</a>', `<h6>${$(this).data('major')}</h6>`)
-            $('.design-link1').load('/img/icon/link-icon.svg')
+            $('.design-link1').load('img/icon/link-icon.svg')
             setTimeout(function () {
                 $('.our-work-links').removeClass('hidden')
             }, 50)
