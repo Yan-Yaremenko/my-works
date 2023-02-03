@@ -4,16 +4,18 @@ $(document).ready( function() {
 
     (function($) {
         $(function() {
-        
-        $('ul.our-servises-tabs').on('click', 'li:not(.active)', function() {
-            $(this)
-            .addClass('active').siblings().removeClass('active')
-            .closest('div.our-services-items').find('div.our-servises-tab-items').removeClass('active').eq($(this).index()).addClass('active');
-        });
-        
+        $('.our-servises-tab').click(function() {
+            let id = $(this).attr('data-tab'),
+                content = $('.our-servises-tab-items[data-tab="'+ id +'"]');
+            
+            $('.our-servises-tab.active').removeClass('active');
+            $(this).addClass('active');
+            
+            $('.our-servises-tab-items.active').removeClass('active');
+            content.addClass('active');
+         });
         });
         })(jQuery);
-
 
 // Фільтр та таби Our Amazing Work
 
@@ -32,7 +34,7 @@ $(document).ready( function() {
     function filterCatalog(category){
     if(fActive != category){
     $('.grid-items').filter('.'+category).slideDown(500);
-    $('.grid-items').filter(':not(.'+category+')').slideUp(500);
+    $('.grid-items').filter(':not(.'+category+')').slideUp(500)
     fActive = category;
     }};
     
@@ -64,11 +66,30 @@ $(document).ready( function() {
 
         setTimeout(function() {
         $(".grid-items").removeClass('more-img');
-        $('.our-work-grid').css('grid-template-rows', 'repeat(6, 206px)')
         $(".animate").css('display', 'none');
         $('.our-work-more').css('display', 'none');
         }, 2000);
         
 
     });
+    (function($) {
+        $(function() {
+    
+    $('.grid-items').each(function() {
+        $(this).hover(function () {
+            $(this).append('<div class="our-work-links">')
+            $('.our-work-links').addClass('hidden')
+            $('.our-work-links').append('<div class="design-links">','<div class="signed">')
+            $('.design-links').append('<a href="#" class="design-link1">', '<a href="#" class="design-link2">')
+            $('.signed').append('<a href="#">CREATIVE DESIGN</a>', `<h6>${$(this).data('major')}</h6>`)
+            $('.design-link1').load('/img/icon/link-icon.svg')
+            setTimeout(function () {
+                $('.our-work-links').removeClass('hidden')
+            }, 50)
+            }, function() {
+            $(".our-work-links").remove()
+            });
+    })
+    });
+    })(jQuery);
 });
